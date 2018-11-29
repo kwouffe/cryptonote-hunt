@@ -10,6 +10,7 @@ import common
 import walletsearch
 import base64hunt
 import mining_domains
+import searchstuffs
 from check_base64 import extract_base64_strings
 
 #load config file
@@ -27,7 +28,7 @@ def main():
     p = argparse.ArgumentParser(
         description='processing crytonote-mining samples'
     )
-    p.add_argument('--process', dest='process', choices=['base64','wallets','base64hunt','miningdomains'], required=True)
+    p.add_argument('--process', dest='process', choices=['base64','wallets','base64hunt','miningdomains','urls'], required=True)
     args = p.parse_args(argv[1:])
 
     if args.process == 'base64':
@@ -65,6 +66,14 @@ def main():
         with open('backup.json', 'w') as data_file:
             data_file.write(json.dumps(db, indent=4))
         updated_db = search_mining_domains(db)
+#        print(json.dumps(updated_db['samples'][:100], indent=4))
+        with open(json_db, 'w') as data_file:
+            data_file.write(json.dumps(updated_db, indent=4))
+
+    if args.process == 'urls':
+        with open('backup.json', 'w') as data_file:
+            data_file.write(json.dumps(db, indent=4))
+        updated_db = search_urls(db)
 #        print(json.dumps(updated_db['samples'][:100], indent=4))
         with open(json_db, 'w') as data_file:
             data_file.write(json.dumps(updated_db, indent=4))
@@ -140,5 +149,11 @@ def search_mining_domains(data):
         data['samples'][sample_index] = updated_sample
     return data
 
+def search_urls(data):
+    for sample in data['samples']:
+        sample_index = data['samples'].index(sample)
+        updated_sample = searchstuffs.urls(sample)
+        data['samples'][sample_index] = updated_sample
+    return data
 
 main()
