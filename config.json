@@ -1,0 +1,7 @@
+{
+ "samples_dir" : "./samples/",
+ "rules_dir" : "./rules/",
+ "log_dir" : "./logs/",
+ "json_db" : "crypto-hunt.json",
+ "domains_file" : "./domains.txt"
+}
