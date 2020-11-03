@@ -1,5 +1,5 @@
-		alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"CERT-EU - Stratum login to pool"; flow:established,to_server; content:"|22|method|22 3A| |22|login|22 2C| |22|params|22 3A| |7B 22|login|22|"; classtype:trojan-activity; sid:6666666; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"CERT-EU - Stratum login to pool"; flow:established,to_server; content:"|22|method|22 3A| |22|login|22 2C| |22|params|22 3A| |7B 22|login|22|"; classtype:trojan-activity; sid:6666666; rev:1;)
 
-		alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"CERT-EU - Stratum job from pool"; flow:established,to_client; content:"|22|job|22 3A 7B 22|blob|22 3A 22|"; classtype:trojan-activity; sid:6666667; rev:1;)
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"CERT-EU - Stratum job from pool"; flow:established,to_client; content:"|22|job|22 3A 7B 22|blob|22 3A 22|"; classtype:trojan-activity; sid:6666667; rev:1;)
 
-		alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"CERT-EU - Stratum result of job to pool"; flow:established,to_server; content:"|22|method|22 3A| |22|submit|22 2C| |22|params|22 3A| |7B 22|id|22|"; classtype:trojan-activity; sid:6666668; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"CERT-EU - Stratum result of job to pool"; flow:established,to_server; content:"|22|method|22 3A| |22|submit|22 2C| |22|params|22 3A| |7B 22|id|22|"; classtype:trojan-activity; sid:6666668; rev:1;)
